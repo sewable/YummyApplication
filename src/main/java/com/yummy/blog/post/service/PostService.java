@@ -1,6 +1,7 @@
 package com.yummy.blog.post.service;
 
 import com.yummy.blog.post.dto.PostDto;
+import com.yummy.blog.post.entity.IngredientEntity;
 import com.yummy.blog.post.entity.PostEntity;
 import com.yummy.blog.post.form.PostForm;
 import com.yummy.blog.post.mapper.PostMapper;
@@ -9,6 +10,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Service
 public class PostService {
@@ -39,8 +41,11 @@ public class PostService {
     public PostDto create(PostForm form) {
         PostEntity post = new PostEntity()
                 .setTitle(form.getTitle())
+                .setPhoto(form.getPhoto())
                 .setContent(form.getContent())
                 .setAuthor(form.getAuthor());
+
+        post.setIngredients(createIngredients(form, post));
 
         return PostMapper.map(
                 postRepository.saveAndFlush(post)
@@ -54,5 +59,12 @@ public class PostService {
 
     public void delete(Long id) {
         postRepository.deleteById(id);
+    }
+
+    public List<IngredientEntity> createIngredients(PostForm form, PostEntity entity) {
+        return form.getIngredients()
+                .stream()
+                .map(ingredientStr -> new IngredientEntity().setValue(ingredientStr).setPost(entity))
+                .collect(Collectors.toList());
     }
 }

@@ -12,6 +12,8 @@ public class PostMapper {
         return new PostDto()
                 .setId(entity.getId())
                 .setTitle(entity.getTitle())
+                .setPhoto(entity.getPhoto())
+                .setIngredients(IngredientMapper.map(entity.getIngredients()))
                 .setContent(entity.getContent())
                 .setAuthor(entity.getAuthor());
     }

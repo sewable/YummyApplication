@@ -1,10 +1,13 @@
 package com.yummy.blog.post.entity;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
+import java.util.List;
 
 @Entity
 @Table(name = "post")
@@ -15,8 +18,15 @@ public class PostEntity {
     private Long id;
 
     private String title;
+    private String photo;
+
+    @OneToMany(mappedBy = "post", cascade = CascadeType.ALL)
+    private List<IngredientEntity> ingredients;
     private String content;
     private String author;
+
+    public PostEntity() {
+    }
 
     public Long getId() {
         return id;
@@ -28,6 +38,24 @@ public class PostEntity {
 
     public PostEntity setTitle(String title) {
         this.title = title;
+        return this;
+    }
+
+    public String getPhoto() {
+        return photo;
+    }
+
+    public PostEntity setPhoto(String photo) {
+        this.photo = photo;
+        return this;
+    }
+
+    public List<IngredientEntity> getIngredients() {
+        return ingredients;
+    }
+
+    public PostEntity setIngredients(List<IngredientEntity> ingredients) {
+        this.ingredients = ingredients;
         return this;
     }
 

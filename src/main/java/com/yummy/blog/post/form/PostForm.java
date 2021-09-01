@@ -2,12 +2,21 @@ package com.yummy.blog.post.form;
 
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
+import java.util.List;
 
 public class PostForm {
 
     @NotNull(message = "Post's title is required")
     @NotEmpty(message = "Post's title cannot be empty")
     private String title;
+
+    @NotNull(message = "Post's photo is required")
+    @NotEmpty(message = "Post's photo cannot be empty")
+    private String photo;
+
+    @NotNull(message = "Post's ingredients are required")
+    @NotEmpty(message = "Post's ingredients cannot be empty")
+    private List<String> ingredients;
 
     @NotNull(message = "Post's content is required")
     @NotEmpty(message = "Post's content cannot be empty")
@@ -23,6 +32,24 @@ public class PostForm {
 
     public PostForm setTitle(String title) {
         this.title = title;
+        return this;
+    }
+
+    public String getPhoto() {
+        return photo;
+    }
+
+    public PostForm setPhoto(String photo) {
+        this.photo = photo;
+        return this;
+    }
+
+    public List<String> getIngredients() {
+        return ingredients;
+    }
+
+    public PostForm setIngredients(List<String> ingredients) {
+        this.ingredients = ingredients;
         return this;
     }
 

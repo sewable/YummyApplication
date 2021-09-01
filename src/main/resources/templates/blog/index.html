@@ -3,8 +3,28 @@
 <head>
     <meta charset="UTF-8">
     <title>Title</title>
+    <link media="all" rel="stylesheet"
+    href="//netdna.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css">
 </head>
 <body>
-
+    <div class="container">
+        <div class="row">
+            <div class="col-12">
+                <ul class="list-group">
+                    <li th:each="post : ${posts}" class="list-group-item">
+                        <h2 th:text="${post.title}"></h2>
+                        <img th:src="${post.photo}"/>
+                        <ul class="list-group">
+                            <li th:each="ingredients : ${post.ingredients}" class="list-group-item">
+                                <p th:text="${ingredients.value}"></p>
+                            </li>
+                        </ul>
+                        <p th:text="${post.content}"></p>
+                        <p th:text="${post.author}"></p>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
 </body>
 </html>
