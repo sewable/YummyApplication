@@ -1,6 +1,7 @@
 package com.yummy.blog.post.entity;
 
 import javax.persistence.CascadeType;
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -22,6 +23,8 @@ public class PostEntity {
 
     @OneToMany(mappedBy = "post", cascade = CascadeType.ALL)
     private List<IngredientEntity> ingredients;
+
+    @Column(columnDefinition = "LONGTEXT")
     private String content;
     private String author;
 
