@@ -35,6 +35,11 @@ public class PostEntity {
         return id;
     }
 
+    public PostEntity setId(Long id) {
+        this.id = id;
+        return this;
+    }
+
     public String getTitle() {
         return title;
     }

@@ -33,8 +33,8 @@ public class PostService {
         return PostMapper.map(post);
     }
 
-    public PostDto getPostByAuthor(String author) {
-        PostEntity post = postRepository.findOneByAuthor(author);
+    public PostDto getPostsByAuthor(String author) {
+        PostEntity post = postRepository.findAllByAuthor(author);
         return PostMapper.map(post);
     }
 

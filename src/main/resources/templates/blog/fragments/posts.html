@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
     <title>Post template</title>
@@ -8,14 +8,14 @@
 
     <div class="container" th:fragment="template">
         <div class="card-deck">
-            <div class="card" th:each="post : ${posts}">
-                <img class="card-img-top" th:src="${post.photo}"/>
+            <div class="card bg-secondary text-white" th:each="post : ${posts}">
+                <img class="card-img-top" th:src="${'/' + post.photo}"/>
                 <div class="card-body">
                     <h3 class="card-title" th:text="${post.title}"></h3>
                     <ul class="list">
                         <li class="list-item" th:each="ingredients : ${post.ingredients}" th:text="${ingredients}"></li>
                     </ul>
-                    <p class="card-text" th:text="${post.content}"></p>
+                    <p class="card-text" th:utext="${post.content}"></p>
                     <p class="card-footer" th:text="${post.author}"></p>
                 </div>
             </div>
