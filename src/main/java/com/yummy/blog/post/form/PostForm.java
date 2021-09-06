@@ -2,12 +2,14 @@ package com.yummy.blog.post.form;
 
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
 import java.util.List;
 
 public class PostForm {
 
     @NotNull(message = "Post's title is required")
     @NotEmpty(message = "Post's title cannot be empty")
+    @Size(max = 100, message = "Title is to long. Max signs are 100")
     private String title;
 
     @NotNull(message = "Post's photo is required")

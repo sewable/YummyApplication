@@ -6,12 +6,23 @@
     <div th:replace="blog/fragments/head.html :: template"></div>
 <!--    head.html:END-->
 
+    <style>
+        body {
+            height: 100vh;
+        }
+    </style>
+
 </head>
 <body>
 
-<!--    posts.html:START-->
-    <div th:replace="blog/fragments/posts.html :: template"></div>
-<!--    posts.html:END    -->
+    <div class="container h-100">
+        <div class="row h-100 justify-content-center align-items-center text-center text-info">
+            <div class="col-12">
+                <h1>Yummy</h1>
+                <p>This is yummy application</p>
+            </div>
+        </div>
+    </div>
 
 </body>
 </html>

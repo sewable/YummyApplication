@@ -1,4 +1,5 @@
 body {
     font-family: 'Merriweather', serif;
-    background-color: lightgray;
+    background: url('main-photo.png') no-repeat fixed;
+
 }

@@ -2,10 +2,10 @@
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
 
-    <!--    head.html:START-->
+<!--    head.html:START-->
     <div th:replace="blog/fragments/head.html :: template"></div>
-    <!--    head.html:END-->
-    <title>Recipes</title>
+<!--    head.html:END-->
+    <title>Post</title>
 
 </head>
 <body>
@@ -19,7 +19,7 @@
 
     <div class="container">
         <!--    posts.html:START-->
-        <div th:replace="blog/fragments/posts.html :: template"></div>
+        <div th:replace="blog/fragments/post.html :: template(post=${post})"></div>
         <!--    posts.html:END    -->
     </div>
 

@@ -31,26 +31,26 @@ public class PostWebController {
     @GetMapping("/blog/recipes/{id}")
     public String getPost(@PathVariable("id") Long id, Model model) {
         model.addAttribute("post", postService.getPost(id));
-        return "blog/post.html";
+        return "blog/recipe.html";
     }
 
-    @GetMapping("/blog/recipes/{title}")
-    public String getPostByTitle(@PathVariable("title") String title, Model model) {
-        model.addAttribute("post", postService.getPostByTitle(title));
-        return "blog/post.html";
-    }
-
-    @GetMapping("/blog/recipes/{author}")
-    public String getPostsByAuthor(@PathVariable("author") String author, Model model) {
-        model.addAttribute("posts", postService.getPostsByAuthor(author));
-        return "blog/recipes.html";
-    }
+//    @GetMapping("/blog/recipes/{title}")
+//    public String getPostByTitle(@PathVariable("title") String title, Model model) {
+//        model.addAttribute("post", postService.getPostByTitle(title));
+//        return "blog/recipe.html";
+//    }
+//
+//    @GetMapping("/blog/recipes/{author}")
+//    public String getPostsByAuthor(@PathVariable("author") String author, Model model) {
+//        model.addAttribute("posts", postService.getPostsByAuthor(author));
+//        return "blog/recipes.html";
+//    }
 
     @PostMapping("/blog/recipes")
     public String createPost(@RequestBody @Valid PostForm form, Model model) {
         PostDto post = postService.create(form);
         model.addAttribute("post", post);
-        return ":redirect/blog/post.html";
+        return ":redirect/blog/recipe.html";
     }
 
     @PutMapping("/blog/recipes/{id}")
