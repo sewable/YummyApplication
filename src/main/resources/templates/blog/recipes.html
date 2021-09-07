@@ -10,10 +10,11 @@
 </head>
 <body>
 
-    <header class="container">
-        <div class="jumbotron bg-secondary text-center text-white">
+    <header class="container position-relative">
+        <div class="jumbotron bg-secondary text-center text-white border border-dark">
             <h1 class="font-weight-bold">Yummy</h1>
             <p>This is yummy web site</p>
+            <a class="stretched-link" th:href="@{/blog}"></a>
         </div>
     </header>
 
@@ -23,7 +24,7 @@
         <!--    posts.html:END    -->
     </div>
 
-    <footer class="bg-secondary mt-4 p-4 text-white text-center">
+    <footer class="bg-secondary mt-4 p-4 text-white text-center border border-dark">
         <h4>Footer</h4>
     </footer>
 
