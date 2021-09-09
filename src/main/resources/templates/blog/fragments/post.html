@@ -16,6 +16,11 @@
         <h4 class="m-3">How to prepare:</h4>
         <p class="m-3 text-justify" th:utext="${post.content}"></p>
         <a class="btn btn-info btn-outline-dark text-white m-3" th:href="@{/blog/recipes}">Back</a>
+        <form class="float-right p-3" th:action="@{/blog/recipes/{id}/delete(id=${post.id})}" th:object="${post}" method="post">
+            <div class="form-group submit-cancel">
+                <input class="btn btn-danger btn-outline-dark text-white" type="submit" value="Delete">
+            </div>
+        </form>
         <div class="footer p-3 border-top border-dark" th:text="${post.author}"></div>
     </div>
 

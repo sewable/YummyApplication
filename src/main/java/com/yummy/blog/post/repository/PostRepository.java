@@ -8,6 +8,4 @@ import org.springframework.stereotype.Repository;
 @Repository
 public interface PostRepository extends JpaRepository<PostEntity, Long>, JpaSpecificationExecutor<PostEntity> {
     PostEntity findOneById(Long id);
-    PostEntity findOneByTitle(String title);
-    PostEntity findAllByAuthor(String author);
 }

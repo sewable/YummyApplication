@@ -1,17 +1,23 @@
 package com.yummy.blog.post.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.yummy.blog.user.entity.UserEntity;
+
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import java.util.List;
 
 @Entity
 @Table(name = "post")
+@JsonIgnoreProperties("user")
 public class PostEntity {
 
     @Id
@@ -26,7 +32,10 @@ public class PostEntity {
 
     @Column(columnDefinition = "LONGTEXT")
     private String content;
-    private String author;
+
+    @ManyToOne
+    @JoinColumn(name = "user_username")
+    private UserEntity author;
 
     public PostEntity() {
     }
@@ -76,11 +85,11 @@ public class PostEntity {
         return this;
     }
 
-    public String getAuthor() {
+    public UserEntity getAuthor() {
         return author;
     }
 
-    public PostEntity setAuthor(String author) {
+    public PostEntity setAuthor(UserEntity author) {
         this.author = author;
         return this;
     }

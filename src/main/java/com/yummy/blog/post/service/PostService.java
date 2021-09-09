@@ -28,24 +28,14 @@ public class PostService {
         return PostMapper.map(post);
     }
 
-    public PostDto getPostByTitle(String title) {
-        PostEntity post = postRepository.findOneByTitle(title);
-        return PostMapper.map(post);
-    }
-
-    public PostDto getPostsByAuthor(String author) {
-        PostEntity post = postRepository.findAllByAuthor(author);
-        return PostMapper.map(post);
-    }
-
     public PostDto create(PostForm form) {
         PostEntity post = new PostEntity()
                 .setTitle(form.getTitle())
                 .setPhoto(form.getPhoto())
-                .setContent(form.getContent())
-                .setAuthor(form.getAuthor());
+                .setContent(form.getContent());
 
         post.setIngredients(createIngredients(form, post));
+        post.setAuthor(form.getAuthor());
 
         return PostMapper.map(
                 postRepository.saveAndFlush(post)
