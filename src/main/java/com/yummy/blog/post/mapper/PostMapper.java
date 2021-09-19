@@ -2,6 +2,7 @@ package com.yummy.blog.post.mapper;
 
 import com.yummy.blog.post.dto.PostDto;
 import com.yummy.blog.post.entity.PostEntity;
+import com.yummy.blog.user.mapper.UserMapper;
 
 import java.util.List;
 import java.util.stream.Collectors;
@@ -15,7 +16,7 @@ public class PostMapper {
                 .setPhoto(entity.getPhoto())
                 .setIngredients(IngredientMapper.map(entity.getIngredients()))
                 .setContent(entity.getContent())
-                .setAuthor(entity.getAuthor());
+                .setAuthor(UserMapper.map(entity.getAuthor()));
     }
 
     public static List<PostDto> map(List<PostEntity> entities) {

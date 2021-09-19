@@ -1,4 +1,10 @@
-INSERT INTO post(id, title, photo, content, author)
+INSERT INTO `user`(username, password, role)
+VALUES ('admin1', 'Admin1_123', 'ADMIN'),
+       ('user1', 'User1_123', 'USER'),
+       ('user2', 'User2_123', 'USER')
+;
+
+INSERT INTO post(id, title, photo, content, user_username)
 VALUES (1, 'Chorizo & mozzarella gnocchi bake',
         'gnocchi-1d16725.png',
         'STEP 1 <br/><br/>
@@ -6,7 +12,7 @@ VALUES (1, 'Chorizo & mozzarella gnocchi bake',
         <br/><br/><br/>
         STEP 2 <br/><br/>
         Stir ¾ of the mozzarella and most of the basil through the gnocchi. Divide the mixture between six ovenproof ramekins, or put in one baking dish. Top with the remaining mozzarella, then grill for 3 mins, or until the cheese is melted and golden. Season, scatter over the remaining basil and serve with green salad.',
-        'First author'),
+        'admin1'),
        (2, 'Easy classic lasagne',
         'classic-lasange-4a66137.png',
         'STEP 1 <br/><br/>
@@ -23,7 +29,7 @@ VALUES (1, 'Chorizo & mozzarella gnocchi bake',
         <br/><br/><br/>
         STEP 5 <br/><br/>
         Put the crème fraîche in a bowl and mix with 2 tbsp water to loosen it and make a smooth pourable sauce. Pour this over the top of the pasta, then top with the mozzarella. Sprinkle Parmesan over the top and bake for 25–30 mins until golden and bubbling. Serve scattered with basil, if you like.',
-        'Second author'),
+        'user1'),
        (3, 'Easy carrot cake',
         'carrot-cake-f1b3d0c.png',
         'STEP 1 <br/><br/>
@@ -37,7 +43,7 @@ VALUES (1, 'Chorizo & mozzarella gnocchi bake',
         <br/><br/><br/>
         STEP 4 <br/><br/>
         To make the icing, beat the butter and sugar together until smooth. Add half the soft cheese and beat again, then add the rest (adding it bit by bit prevents the icing from splitting). Remove the cakes from the tins and sandwich together with half the icing. Top with the remaining icing and scatter with the remaining walnuts. Will keep in the fridge for up to five days. Best eaten at room temperature.',
-        'Third author')
+        'user2')
 ;
 
 INSERT INTO ingredients(id, post_id, value)

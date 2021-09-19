@@ -7,14 +7,15 @@ import com.yummy.blog.post.service.PostService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 
 import javax.validation.Valid;
+import java.security.Principal;
 
 @Controller
 public class PostWebController {
@@ -34,23 +35,11 @@ public class PostWebController {
         return "blog/recipe.html";
     }
 
-//    @GetMapping("/blog/recipes/{title}")
-//    public String getPostByTitle(@PathVariable("title") String title, Model model) {
-//        model.addAttribute("post", postService.getPostByTitle(title));
-//        return "blog/recipe.html";
-//    }
-//
-//    @GetMapping("/blog/recipes/{author}")
-//    public String getPostsByAuthor(@PathVariable("author") String author, Model model) {
-//        model.addAttribute("posts", postService.getPostsByAuthor(author));
-//        return "blog/recipes.html";
-//    }
-
     @PostMapping("/blog/recipes")
-    public String createPost(@RequestBody @Valid PostForm form, Model model) {
+    public String createPost(@ModelAttribute @Valid PostForm form, Model model) {
         PostDto post = postService.create(form);
         model.addAttribute("post", post);
-        return ":redirect/blog/recipe.html";
+        return "blog/recipes/" + post.getId();
     }
 
     @PutMapping("/blog/recipes/{id}")
@@ -59,11 +48,12 @@ public class PostWebController {
                              Model model) {
         PostDto post = postService.update(entity.setId(id));
         model.addAttribute("post", post);
-        return "redirect:/blog/post.html";
+        return "redirect:/blog/recipe/" + post.getId();
     }
 
-    @DeleteMapping("/blog/recipes/{id}")
-    public void deletePost(@PathVariable("id") Long id) {
-        postService.delete(id);
+    @PostMapping("/blog/recipes/{id}/delete")
+    public String deletePost(@PathVariable("id") Long id, Principal principal) {
+        postService.delete(id, principal);
+        return "redirect:/blog/recipes";
     }
 }
