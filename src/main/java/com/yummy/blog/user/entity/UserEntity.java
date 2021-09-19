@@ -1,7 +1,7 @@
 package com.yummy.blog.user.entity;
 
 import com.yummy.blog.post.entity.PostEntity;
-import com.yummy.blog.user.role.UserRole;
+import com.yummy.blog.user.enums.UserRole;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;

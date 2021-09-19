@@ -37,7 +37,11 @@ public class PostService {
         return PostMapper.map(post);
     }
 
-    public PostDto create(PostForm form) {
+    public PostDto create(PostForm form, Principal principal) {
+        if (principal == null) {
+            LOGGER.error("Person who was not logged in tried to create post");
+            return null;
+        }
         PostEntity post = new PostEntity()
                 .setTitle(form.getTitle())
                 .setPhoto(form.getPhoto())

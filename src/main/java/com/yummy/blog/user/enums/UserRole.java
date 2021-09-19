@@ -1,4 +1,4 @@
-package com.yummy.blog.user.role;
+package com.yummy.blog.user.enums;
 
 public enum UserRole {
     USER,
