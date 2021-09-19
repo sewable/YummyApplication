@@ -5,7 +5,7 @@ import com.yummy.blog.user.entity.UserEntity;
 import com.yummy.blog.user.form.UserForm;
 import com.yummy.blog.user.mapper.UserMapper;
 import com.yummy.blog.user.repository.UserRepository;
-import com.yummy.blog.user.role.UserRole;
+import com.yummy.blog.user.enums.UserRole;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
