@@ -8,12 +8,14 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 
 import javax.validation.Valid;
+import java.security.Principal;
 
 @Controller
 public class PostWebController {
@@ -34,10 +36,10 @@ public class PostWebController {
     }
 
     @PostMapping("/blog/recipes")
-    public String createPost(@RequestBody @Valid PostForm form, Model model) {
+    public String createPost(@ModelAttribute @Valid PostForm form, Model model) {
         PostDto post = postService.create(form);
         model.addAttribute("post", post);
-        return "redirect:/blog/recipes/" + post.getId();
+        return "blog/recipes/" + post.getId();
     }
 
     @PutMapping("/blog/recipes/{id}")
@@ -50,8 +52,8 @@ public class PostWebController {
     }
 
     @PostMapping("/blog/recipes/{id}/delete")
-    public String deletePost(@PathVariable("id") Long id) {
-        postService.delete(id);
+    public String deletePost(@PathVariable("id") Long id, Principal principal) {
+        postService.delete(id, principal);
         return "redirect:/blog/recipes";
     }
 }

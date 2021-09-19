@@ -6,9 +6,14 @@ import com.yummy.blog.post.entity.PostEntity;
 import com.yummy.blog.post.form.PostForm;
 import com.yummy.blog.post.mapper.PostMapper;
 import com.yummy.blog.post.repository.PostRepository;
+import com.yummy.blog.user.entity.UserEntity;
+import com.yummy.blog.user.repository.UserRepository;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.security.Principal;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -17,6 +22,10 @@ public class PostService {
 
     @Autowired
     private PostRepository postRepository;
+    @Autowired
+    private UserRepository userRepository;
+
+    private static final Logger LOGGER = LoggerFactory.getLogger(PostService.class);
 
     public List<PostDto> getPosts() {
         List<PostEntity> posts = postRepository.findAll();
@@ -47,8 +56,17 @@ public class PostService {
         return PostMapper.map(post);
     }
 
-    public void delete(Long id) {
-        postRepository.deleteById(id);
+    public void delete(Long id, Principal principal) {
+        if (principal == null) {
+            LOGGER.error("Unauthorized person tried to delete post");
+            return;
+        }
+        UserEntity user = userRepository.findOneByUsername(principal.getName());
+        if (user.isAdmin()) {
+            postRepository.deleteById(id);
+        } else {
+            postRepository.deleteByIdAndAuthor(id, user);
+        }
     }
 
     public List<IngredientEntity> createIngredients(PostForm form, PostEntity entity) {

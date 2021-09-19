@@ -33,7 +33,9 @@ public class UserService {
                 .setPassword(form.getPassword())
                 .setRole(UserRole.USER);
 
-        return UserMapper.map(user);
+        UserEntity entity = userRepository.saveAndFlush(user);
+
+        return UserMapper.map(entity);
     }
 
     public UserDto update(UserEntity entity) {

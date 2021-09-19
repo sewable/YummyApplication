@@ -1,6 +1,5 @@
 package com.yummy.blog.user.mapper;
 
-import com.yummy.blog.post.mapper.PostMapper;
 import com.yummy.blog.user.dto.UserDto;
 import com.yummy.blog.user.entity.UserEntity;
 

@@ -1,7 +1,5 @@
 package com.yummy.blog.security;
 
-import com.yummy.blog.user.service.UserService;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.http.HttpMethod;
@@ -15,9 +13,6 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 @Configuration
 @EnableGlobalMethodSecurity(securedEnabled = true)
 public class SecurityConfig extends WebSecurityConfigurerAdapter {
-
-    @Autowired
-    private UserService userDetailsService;
 
     @Override
     protected void configure(AuthenticationManagerBuilder auth) throws Exception {
@@ -33,11 +28,15 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     protected void configure(HttpSecurity http) throws Exception {
         http.csrf().disable();
         http.authorizeRequests()
-                .antMatchers(HttpMethod.POST, "/blog/recipes/*/delete").hasRole("ADMIN")
-                .antMatchers(HttpMethod.POST, "/blog/recipes").hasRole("ADMIN")
-                .antMatchers(HttpMethod.PUT, "/blog/recipes/*").hasRole("ADMIN")
+                .antMatchers("/blog/**").permitAll()
                 .and()
-                .formLogin();
+                .formLogin()
+                .loginPage("/login")
+                .defaultSuccessUrl("/blog")
+                .permitAll()
+                .and()
+                .logout()
+                .permitAll();
     }
 
     @Bean

@@ -70,4 +70,8 @@ public class UserEntity {
         this.posts = posts;
         return this;
     }
+
+    public boolean isAdmin() {
+        return this.role.equals(UserRole.ADMIN);
+    }
 }
