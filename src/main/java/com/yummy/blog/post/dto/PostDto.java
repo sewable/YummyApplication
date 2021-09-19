@@ -1,5 +1,7 @@
 package com.yummy.blog.post.dto;
 
+import com.yummy.blog.user.dto.UserDto;
+
 import java.util.List;
 
 public class PostDto {
@@ -9,7 +11,7 @@ public class PostDto {
     private String photo;
     private List<String> ingredients;
     private String content;
-    private String author;
+    private UserDto author;
 
     public Long getId() {
         return id;
@@ -56,11 +58,11 @@ public class PostDto {
         return this;
     }
 
-    public String getAuthor() {
+    public UserDto getAuthor() {
         return author;
     }
 
-    public PostDto setAuthor(String author) {
+    public PostDto setAuthor(UserDto author) {
         this.author = author;
         return this;
     }

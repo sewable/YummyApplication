@@ -1,5 +1,7 @@
 package com.yummy.blog.post.form;
 
+import com.yummy.blog.user.entity.UserEntity;
+
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
@@ -26,33 +28,18 @@ public class PostForm {
 
     @NotNull(message = "Author is required")
     @NotEmpty(message = "Author cannot be empty")
-    private String author;
+    private UserEntity author;
 
     public String getTitle() {
         return title;
-    }
-
-    public PostForm setTitle(String title) {
-        this.title = title;
-        return this;
     }
 
     public String getPhoto() {
         return photo;
     }
 
-    public PostForm setPhoto(String photo) {
-        this.photo = photo;
-        return this;
-    }
-
     public List<String> getIngredients() {
         return ingredients;
-    }
-
-    public PostForm setIngredients(List<String> ingredients) {
-        this.ingredients = ingredients;
-        return this;
     }
 
     public String getContent() {
@@ -64,12 +51,7 @@ public class PostForm {
         return this;
     }
 
-    public String getAuthor() {
+    public UserEntity getAuthor() {
         return author;
-    }
-
-    public PostForm setAuthor(String author) {
-        this.author = author;
-        return this;
     }
 }

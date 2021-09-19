@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+
+    <!--    head.html:START-->
+    <div th:replace="blog/fragments/head.html :: template"></div>
+    <!--    head.html:END-->
+    <title>Login</title>
+
+    <style>
+        body {
+            height: 100vh;
+        }
+    </style>
+
+</head>
+<body>
+
+    <div class="container h-100 text-white">
+        <div class="row h-100 justify-content-center align-items-center text-center">
+            <div class="col-6 bg-secondary p-3 rounded border border-dark">
+                <form th:action="@{/login}" method="post">
+                    <fieldset>
+                        <legend class="text-info">Please login</legend>
+
+                        <div th:if="${param.error}" class="alert alert-danger">
+                            Invalid username or password
+                        </div>
+                        <div th:if="${param.logout}" class="alert alert-success">
+                            You have been logout
+                        </div>
+
+                        <div class="form-group">
+                            <label for="username">Username</label>
+                            <input class="form-control" type="text" id="username" name="username" placeholder="Enter username" autofocus />
+                        </div>
+
+                        <div class="form-group">
+                            <label for="password">Password</label>
+                            <input class="form-control" type="password" id="password" name="password" placeholder="Enter password" />
+                        </div>
+
+                        <div class="form-actions">
+                            <button type="submit" class="btn btn-primary btn-outline-dark text-white">Log in</button>
+                        </div>
+                    </fieldset>
+                </form>
+                <a class="btn btn-info btn-outline-dark text-white m-3" th:href="@{/blog}">Back</a>
+            </div>
+        </div>
+    </div>
+
+</body>
+</html>
