@@ -35,9 +35,17 @@ public class PostWebController {
         return "blog/recipe.html";
     }
 
+    @GetMapping("/blog/add")
+    public String showCreateForm() {
+        return "blog/create.html";
+    }
+
     @PostMapping("/blog/recipes")
-    public String createPost(@ModelAttribute @Valid PostForm form, Model model) {
-        PostDto post = postService.create(form);
+    public String createPost(@ModelAttribute @Valid PostForm form, Model model, Principal principal) {
+        if (principal == null) {
+            return "redirect:/login";
+        }
+        PostDto post = postService.create(form, principal);
         model.addAttribute("post", post);
         return "blog/recipes/" + post.getId();
     }
@@ -53,6 +61,9 @@ public class PostWebController {
 
     @PostMapping("/blog/recipes/{id}/delete")
     public String deletePost(@PathVariable("id") Long id, Principal principal) {
+        if (principal == null) {
+            return "redirect:/login";
+        }
         postService.delete(id, principal);
         return "redirect:/blog/recipes";
     }

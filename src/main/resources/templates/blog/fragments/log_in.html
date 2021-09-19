@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Login template</title>
+</head>
+<body>
+
+    <div class="container" th:fragment="template">
+        <div class="container d-flex justify-content-center mb-3">
+            <div class="col-4">
+                <a class="btn btn-info btn-outline-dark btn-block text-white m-2" th:href="@{/login}">Log in</a>
+            </div>
+            <div class="col-4">
+                <a class="btn btn-info btn-outline-dark btn-block text-white m-2" th:href="@{/logout}">Log out</a>
+            </div>
+        </div>
+    </div>
+
+</body>
+</html>

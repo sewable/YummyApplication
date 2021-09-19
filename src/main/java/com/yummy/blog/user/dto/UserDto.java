@@ -1,7 +1,7 @@
 package com.yummy.blog.user.dto;
 
 import com.yummy.blog.post.dto.PostDto;
-import com.yummy.blog.user.role.UserRole;
+import com.yummy.blog.user.enums.UserRole;
 
 import java.util.List;
 
