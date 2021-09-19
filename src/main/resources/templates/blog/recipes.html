@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+
+    <!--    head.html:START-->
+    <div th:replace="blog/fragments/head.html :: template"></div>
+    <!--    head.html:END-->
+    <title>Recipes</title>
+
+</head>
+<body>
+
+    <header class="container position-relative">
+        <div class="jumbotron bg-secondary text-center text-white border border-dark">
+            <h1 class="font-weight-bold">Yummy</h1>
+            <p>This is yummy web site</p>
+            <a class="stretched-link" th:href="@{/blog}"></a>
+        </div>
+    </header>
+
+    <!--    log_in.html:START-->
+    <div th:replace="blog/fragments/log_in.html :: template"></div>
+    <!--    log_in.html:END-->
+
+    <a th:href="@{/blog/add}">Add</a>
+
+    <div class="container">
+        <!--    posts.html:START-->
+        <div th:replace="blog/fragments/posts.html :: template"></div>
+        <!--    posts.html:END    -->
+    </div>
+
+    <footer class="bg-secondary mt-4 p-4 text-white text-center border border-dark">
+        <h4>Footer</h4>
+    </footer>
+
+</body>
+</html>

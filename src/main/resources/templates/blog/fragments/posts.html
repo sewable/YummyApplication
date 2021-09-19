@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Posts template</title>
+</head>
+<body>
+
+    <div class="container" th:fragment="template">
+        <div class="card-deck">
+            <div class="card bg-secondary text-white border border-dark" th:each="post : ${posts}">
+                <img class="card-img-top" th:src="${'/' + post.photo}"/>
+                <div class="card-body">
+                    <h3 class="card-title text-info" th:text="${post.title}"></h3>
+                    <p class="card-text">Ingredients:</p>
+                    <ul class="list-group">
+                        <li class="list-group-item bg-secondary text-white" th:text="${post.ingredients[0]}"></li>
+                    </ul>
+                </div>
+                <p class="card-text text-center">. . .</p>
+                <a class="btn btn-info btn-outline-dark text-white" th:href="@{/blog/recipes/{id}(id=${post.id})}">More</a>
+                <div class="card-footer" th:text="${post.author}"></div>
+            </div>
+        </div>
+    </div>
+
+</body>
+</html>

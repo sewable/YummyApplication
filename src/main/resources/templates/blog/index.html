@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+
+<!--    head.html:START-->
+    <div th:replace="blog/fragments/head.html :: template"></div>
+<!--    head.html:END-->
+
+    <style>
+        body {
+            height: 100vh;
+        }
+    </style>
+
+</head>
+<body>
+
+    <div class="container h-100">
+        <div class="row h-100 justify-content-center align-items-center text-center text-info">
+            <div class="col-12">
+                <h1 class="display-2"><span class="badge badge-info border border-dark">Yummy</span></h1>
+                <p class="display-4 text-white" style="text-shadow: -1px 0 black, 0 1px black, 1px 0 black, 0 -1px black;">Welcome to yummy application!</p>
+                <a class="btn btn-info btn-outline-dark btn-lg text-white" th:href="@{/blog/recipes}">Let's cook!</a>
+            </div>
+        </div>
+    </div>
+
+</body>
+</html>
