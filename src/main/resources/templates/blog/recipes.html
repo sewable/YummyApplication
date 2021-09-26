@@ -24,11 +24,11 @@
 
     <a th:href="@{/blog/add}">Add</a>
 
-    <div class="container">
-        <!--    posts.html:START-->
-        <div th:replace="blog/fragments/posts.html :: template"></div>
-        <!--    posts.html:END    -->
-    </div>
+
+    <!--    posts.html:START-->
+    <div th:replace="blog/fragments/posts.html :: template"></div>
+    <!--    posts.html:END    -->
+
 
     <footer class="bg-secondary mt-4 p-4 text-white text-center border border-dark">
         <h4>Footer</h4>
