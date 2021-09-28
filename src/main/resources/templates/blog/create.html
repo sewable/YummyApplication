@@ -18,7 +18,7 @@
 
     <div class="container h-100">
         <div class="row h-100 justify-content-center align-items-center text-center">
-            <div class="col-12">
+            <div class="col-12 bg-secondary text-white p-3 m-5 border border-dark rounded">
                 <form th:action="@{/add}" th:object="${post}" method="post" enctype="multipart/form-data">
                     <div class="form-group">
                         <label for="title">Title:</label>
@@ -35,20 +35,21 @@
                         <div class="input-group" id="inputFormRow">
                             <input type="text" class="form-control" id="ingredient[0]" placeholder="Enter ingredient" th:field="*{ingredients[0]}" />
                             <div class="input-group-append">
-                                <button id="removeRow" type="button" class="btn btn-danger">Remove</button>
+                                <button id="removeRow" type="button" class="btn btn-danger btn-outline-dark text-white">Remove</button>
                             </div>
                         </div>
                         <div id="newRow"></div>
                     </div>
 
-                    <button id="addRow" type="button" class="btn btn-info">Add</button>
+                    <button id="addRow" type="button" class="btn btn-info btn-outline-dark text-white">Add</button>
 
-                    <div class="form-group">
+                    <div class="form-group m-2">
                         <label for="content">How to make:</label>
-                        <textarea type="text" class="form-control" id="content" placeholder="Enter method of preparation" th:field="*{content}" required />
+                        <textarea type="text" class="form-control" id="content" oninput="divide()" rows="15" placeholder="Enter method of preparation" th:field="*{content}" required />
                     </div>
 
-                    <button type="submit" class="btn btn-primary">Submit</button>
+                    <a class="btn btn-info btn-outline-dark text-white m-3" th:href="@{/blog/recipes}">Back</a>
+                    <button type="submit" class="btn btn-primary btn-outline-dark text-white">Submit</button>
 
                 </form>
             </div>
@@ -66,7 +67,7 @@
             html += '<div class="input-group" id="inputFormRow">';
             html += '<input type="text" class="form-control" id="ingredient['+index+']" placeholder="Enter ingredient" name="ingredients['+index+']" />';
             html += '<div class="input-group-append">';
-            html += '<button id="removeRow" type="button" class="btn btn-danger">Remove</button>';
+            html += '<button id="removeRow" type="button" class="btn btn-danger btn-outline-dark text-white">Remove</button>';
             html += '</div>';
             html += '</div>';
 
