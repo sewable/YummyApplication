@@ -22,13 +22,16 @@
     <div th:replace="blog/fragments/log_in.html :: template"></div>
     <!--    log_in.html:END-->
 
-    <a th:href="@{/blog/add}">Add</a>
-
     <div class="container">
-        <!--    posts.html:START-->
-        <div th:replace="blog/fragments/posts.html :: template"></div>
-        <!--    posts.html:END    -->
+        <div class="container d-flex justify-content-center mb-3">
+            <a class="btn btn-primary btn-outline-dark text-white" th:href="@{/blog/add}">Add</a>
+        </div>
     </div>
+
+    <!--    posts.html:START-->
+    <div th:replace="blog/fragments/posts.html :: template"></div>
+    <!--    posts.html:END    -->
+
 
     <footer class="bg-secondary mt-4 p-4 text-white text-center border border-dark">
         <h4>Footer</h4>

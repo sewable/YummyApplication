@@ -41,7 +41,7 @@ public class UserWebController {
         return "redirect:/blog/recipes";
     }
 
-    @PostMapping("/blog/users/")
+    @PostMapping("/addUser")
     public String createUser(@RequestBody @Valid UserForm form, Model model) {
         UserDto user = userService.create(form);
         model.addAttribute("user", user);

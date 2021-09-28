@@ -1,5 +1,6 @@
 package com.yummy.blog.post.dto;
 
+import com.yummy.blog.photo.dto.PhotoDto;
 import com.yummy.blog.user.dto.UserDto;
 
 import java.util.List;
@@ -8,7 +9,7 @@ public class PostDto {
 
     private Long id;
     private String title;
-    private String photo;
+    private PhotoDto photo;
     private List<String> ingredients;
     private String content;
     private UserDto author;
@@ -31,11 +32,11 @@ public class PostDto {
         return this;
     }
 
-    public String getPhoto() {
+    public PhotoDto getPhoto() {
         return photo;
     }
 
-    public PostDto setPhoto(String photo) {
+    public PostDto setPhoto(PhotoDto photo) {
         this.photo = photo;
         return this;
     }

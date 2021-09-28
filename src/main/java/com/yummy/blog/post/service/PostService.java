@@ -1,5 +1,7 @@
 package com.yummy.blog.post.service;
 
+import com.yummy.blog.photo.entity.PhotoEntity;
+import com.yummy.blog.photo.service.PhotoService;
 import com.yummy.blog.post.dto.PostDto;
 import com.yummy.blog.post.entity.IngredientEntity;
 import com.yummy.blog.post.entity.PostEntity;
@@ -24,6 +26,8 @@ public class PostService {
     private PostRepository postRepository;
     @Autowired
     private UserRepository userRepository;
+    @Autowired
+    private PhotoService photoService;
 
     private static final Logger LOGGER = LoggerFactory.getLogger(PostService.class);
 
@@ -42,13 +46,19 @@ public class PostService {
             LOGGER.error("Person who was not logged in tried to create post");
             return null;
         }
+
+        PhotoEntity photo = photoService.store(form.getPhoto());
+
         PostEntity post = new PostEntity()
                 .setTitle(form.getTitle())
-                .setPhoto(form.getPhoto())
+                .setPhoto(photo)
                 .setContent(form.getContent());
 
         post.setIngredients(createIngredients(form, post));
-        post.setAuthor(form.getAuthor());
+
+        UserEntity user = userRepository.findOneByUsername(principal.getName());
+
+        post.setAuthor(user);
 
         return PostMapper.map(
                 postRepository.saveAndFlush(post)

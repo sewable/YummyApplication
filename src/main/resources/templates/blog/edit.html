@@ -1,25 +1,15 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<html lang="en">
 <head>
-
-    <!--    head.html:START-->
-    <div th:replace="blog/fragments/head.html :: template"></div>
-    <!--    head.html:END-->
-    <title>Create</title>
-
-    <style>
-        body {
-            height: 100vh;
-        }
-    </style>
-
+    <meta charset="UTF-8">
+    <title>Edit</title>
 </head>
 <body>
 
     <div class="container h-100">
         <div class="row h-100 justify-content-center align-items-center text-center">
             <div class="col-12 bg-secondary text-white p-3 m-5 border border-dark rounded">
-                <form th:action="@{/add}" th:object="${post}" method="post" enctype="multipart/form-data">
+                <form th:action="@{/edit/{id}(id=${post.id})" th:object="${post}" method="post" enctype="multipart/form-data">
                     <div class="form-group">
                         <label for="title">Title:</label>
                         <input type="text" class="form-control" id="title" placeholder="Enter title" th:field="*{title}" required />
