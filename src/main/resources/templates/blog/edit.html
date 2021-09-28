@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Edit</title>
+</head>
+<body>
+
+    <div class="container h-100">
+        <div class="row h-100 justify-content-center align-items-center text-center">
+            <div class="col-12 bg-secondary text-white p-3 m-5 border border-dark rounded">
+                <form th:action="@{/edit/{id}(id=${post.id})" th:object="${post}" method="post" enctype="multipart/form-data">
+                    <div class="form-group">
+                        <label for="title">Title:</label>
+                        <input type="text" class="form-control" id="title" placeholder="Enter title" th:field="*{title}" required />
+                    </div>
+
+                    <div class="form-group">
+                        <label for="image">Image:</label>
+                        <input type="file" id="image" accept="image/png, image/jpeg" th:field="*{photo}" required />
+                    </div>
+
+                    <div class="form-group">
+                        <label for="ingredient[0]">Ingredients:</label>
+                        <div class="input-group" id="inputFormRow">
+                            <input type="text" class="form-control" id="ingredient[0]" placeholder="Enter ingredient" th:field="*{ingredients[0]}" />
+                            <div class="input-group-append">
+                                <button id="removeRow" type="button" class="btn btn-danger btn-outline-dark text-white">Remove</button>
+                            </div>
+                        </div>
+                        <div id="newRow"></div>
+                    </div>
+
+                    <button id="addRow" type="button" class="btn btn-info btn-outline-dark text-white">Add</button>
+
+                    <div class="form-group m-2">
+                        <label for="content">How to make:</label>
+                        <textarea type="text" class="form-control" id="content" oninput="divide()" rows="15" placeholder="Enter method of preparation" th:field="*{content}" required />
+                    </div>
+
+                    <a class="btn btn-info btn-outline-dark text-white m-3" th:href="@{/blog/recipes}">Back</a>
+                    <button type="submit" class="btn btn-primary btn-outline-dark text-white">Submit</button>
+
+                </form>
+            </div>
+        </div>
+    </div>
+
+
+    <script src="//ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <script type="text/javascript">
+
+        var index = 1;
+        // add row
+        $("#addRow").click(function () {
+            var html = '';
+            html += '<div class="input-group" id="inputFormRow">';
+            html += '<input type="text" class="form-control" id="ingredient['+index+']" placeholder="Enter ingredient" name="ingredients['+index+']" />';
+            html += '<div class="input-group-append">';
+            html += '<button id="removeRow" type="button" class="btn btn-danger btn-outline-dark text-white">Remove</button>';
+            html += '</div>';
+            html += '</div>';
+
+            index++;
+
+            $('#newRow').append(html);
+        });
+
+        // remove row
+        $(document).on('click', '#removeRow', function () {
+            $(this).closest('#inputFormRow').remove();
+        });
+    </script>
+</body>
+</html>

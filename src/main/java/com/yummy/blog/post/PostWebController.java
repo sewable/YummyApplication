@@ -54,7 +54,16 @@ public class PostWebController {
         return "redirect:blog/recipes/" + post.getId();
     }
 
-    @PutMapping("/blog/recipes/{id}")
+    @GetMapping("/blog/edit")
+    public String showEditForm(Model model, PostEntity entity, Principal principal) {
+        if (principal == null) {
+            return "redirect:/login";
+        }
+        model.addAttribute("post", entity);
+        return "blog/edit.html";
+    }
+
+    @PutMapping("/edit/{id}")
     public String updatePost(@PathVariable("id") Long id,
                              @RequestBody PostEntity entity,
                              Model model) {
