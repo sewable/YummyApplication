@@ -7,6 +7,7 @@ import com.yummy.blog.post.entity.IngredientEntity;
 import com.yummy.blog.post.entity.PostEntity;
 import com.yummy.blog.post.form.PostForm;
 import com.yummy.blog.post.mapper.PostMapper;
+import com.yummy.blog.post.repository.IngredientsRepository;
 import com.yummy.blog.post.repository.PostRepository;
 import com.yummy.blog.user.entity.UserEntity;
 import com.yummy.blog.user.repository.UserRepository;
@@ -17,6 +18,7 @@ import org.springframework.stereotype.Service;
 
 import java.security.Principal;
 import java.util.List;
+import java.util.Objects;
 import java.util.stream.Collectors;
 
 @Service
@@ -24,6 +26,8 @@ public class PostService {
 
     @Autowired
     private PostRepository postRepository;
+    @Autowired
+    private IngredientsRepository ingredientsRepository;
     @Autowired
     private UserRepository userRepository;
     @Autowired
@@ -60,14 +64,39 @@ public class PostService {
 
         post.setAuthor(user);
 
-        return PostMapper.map(
-                postRepository.saveAndFlush(post)
-        );
+        return PostMapper.map(postRepository.saveAndFlush(post));
     }
 
-    public PostDto update(PostEntity entity) {
-        PostEntity post = postRepository.saveAndFlush(entity);
+    public PostDto getPost(Long id, Principal principal) {
+        PostEntity post = postRepository.findOneById(id);
+        if (!post.getAuthor().getUsername().equals(principal.getName())) {
+            return null;
+        }
         return PostMapper.map(post);
+    }
+
+    public PostDto update(Long id, PostForm form, Principal principal) {
+        if (principal == null) {
+            LOGGER.error("Person who was not logged in tried to edit post");
+            return null;
+        }
+
+        PhotoEntity photo = photoService.store(form.getPhoto());
+
+        PostEntity postForUpdate = postRepository.findOneById(id);
+
+        if (!postForUpdate.getAuthor().getUsername().equals(principal.getName())) {
+            return null;
+        }
+
+        ingredientsRepository.deleteByPostId(postForUpdate.getId());
+        postForUpdate
+                .setTitle(form.getTitle())
+                .setPhoto(photo)
+                .setIngredients(createIngredients(form, postForUpdate))
+                .setContent(form.getContent());
+
+        return PostMapper.map(postRepository.saveAndFlush(postForUpdate));
     }
 
     public void delete(Long id, Principal principal) {
@@ -86,6 +115,7 @@ public class PostService {
     public List<IngredientEntity> createIngredients(PostForm form, PostEntity entity) {
         return form.getIngredients()
                 .stream()
+                .filter(Objects::nonNull)
                 .map(ingredientStr -> new IngredientEntity().setValue(ingredientStr).setPost(entity))
                 .collect(Collectors.toList());
     }

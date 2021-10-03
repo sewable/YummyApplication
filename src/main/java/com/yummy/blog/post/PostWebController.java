@@ -12,8 +12,6 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.PutMapping;
-import org.springframework.web.bind.annotation.RequestBody;
 
 import javax.validation.Valid;
 import java.security.Principal;
@@ -54,22 +52,20 @@ public class PostWebController {
         return "redirect:blog/recipes/" + post.getId();
     }
 
-    @GetMapping("/blog/edit")
-    public String showEditForm(Model model, PostEntity entity, Principal principal) {
+    @GetMapping("/blog/edit/{id}")
+    public String showEditForm(@PathVariable("id") Long id, Model model, Principal principal) {
         if (principal == null) {
             return "redirect:/login";
         }
-        model.addAttribute("post", entity);
+        PostDto post = postService.getPost(id, principal);
+        model.addAttribute("post", post);
         return "blog/edit.html";
     }
 
-    @PutMapping("/edit/{id}")
-    public String updatePost(@PathVariable("id") Long id,
-                             @RequestBody PostEntity entity,
-                             Model model) {
-        PostDto post = postService.update(entity.setId(id));
-        model.addAttribute("post", post);
-        return "redirect:/blog/recipe/" + post.getId();
+    @PostMapping("/edit/{id}")
+    public String updatePost(@PathVariable("id") Long id, @ModelAttribute @Valid PostForm form, Principal principal) {
+        PostDto post = postService.update(id, form, principal);
+        return "redirect:/blog/recipes/" + post.getId();
     }
 
     @PostMapping("/blog/recipes/{id}/delete")
