@@ -1,6 +1,7 @@
 package com.yummy.blog.post.entity;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.yummy.blog.photo.entity.PhotoEntity;
 import com.yummy.blog.user.entity.UserEntity;
 
 import javax.persistence.CascadeType;
@@ -12,6 +13,7 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
 import java.util.List;
 
@@ -25,7 +27,10 @@ public class PostEntity {
     private Long id;
 
     private String title;
-    private String photo;
+
+    @OneToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "photo_id")
+    private PhotoEntity photo;
 
     @OneToMany(mappedBy = "post", cascade = CascadeType.ALL)
     private List<IngredientEntity> ingredients;
@@ -58,11 +63,11 @@ public class PostEntity {
         return this;
     }
 
-    public String getPhoto() {
+    public PhotoEntity getPhoto() {
         return photo;
     }
 
-    public PostEntity setPhoto(String photo) {
+    public PostEntity setPhoto(PhotoEntity photo) {
         this.photo = photo;
         return this;
     }

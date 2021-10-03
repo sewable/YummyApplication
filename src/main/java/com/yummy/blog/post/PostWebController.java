@@ -4,6 +4,7 @@ import com.yummy.blog.post.dto.PostDto;
 import com.yummy.blog.post.entity.PostEntity;
 import com.yummy.blog.post.form.PostForm;
 import com.yummy.blog.post.service.PostService;
+import com.yummy.blog.user.dto.UserDto;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -36,21 +37,33 @@ public class PostWebController {
     }
 
     @GetMapping("/blog/add")
-    public String showCreateForm() {
-        return "blog/create.html";
-    }
-
-    @PostMapping("/blog/recipes")
-    public String createPost(@ModelAttribute @Valid PostForm form, Model model, Principal principal) {
+    public String showCreateForm(Model model, Principal principal) {
         if (principal == null) {
             return "redirect:/login";
         }
-        PostDto post = postService.create(form, principal);
+        PostForm post = new PostForm();
+        UserDto user = new UserDto();
         model.addAttribute("post", post);
-        return "blog/recipes/" + post.getId();
+        model.addAttribute("user", user);
+        return "blog/create.html";
     }
 
-    @PutMapping("/blog/recipes/{id}")
+    @PostMapping("/add")
+    public String createPost(@ModelAttribute @Valid PostForm form, Principal principal) {
+        PostDto post = postService.create(form, principal);
+        return "redirect:blog/recipes/" + post.getId();
+    }
+
+    @GetMapping("/blog/edit")
+    public String showEditForm(Model model, PostEntity entity, Principal principal) {
+        if (principal == null) {
+            return "redirect:/login";
+        }
+        model.addAttribute("post", entity);
+        return "blog/edit.html";
+    }
+
+    @PutMapping("/edit/{id}")
     public String updatePost(@PathVariable("id") Long id,
                              @RequestBody PostEntity entity,
                              Model model) {

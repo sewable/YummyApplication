@@ -1,12 +1,18 @@
-INSERT INTO `user`(username, password, role)
-VALUES ('admin1', 'Admin1_123', 'ADMIN'),
-       ('user1', 'User1_123', 'USER'),
-       ('user2', 'User2_123', 'USER')
+INSERT INTO photo(id, name, original_name, content_type)
+VALUES (1, 'gnocchi-1d16725.png', 'gnocchi-1d16725.png', 'image/png'),
+       (2, 'classic-lasange-4a66137.png', 'classic-lasange-4a66137.png', 'image/png'),
+       (3, 'carrot-cake-f1b3d0c.png', 'carrot-cake-f1b3d0c.png', 'image/png')
 ;
 
-INSERT INTO post(id, title, photo, content, user_username)
+INSERT INTO `user`(username, password, role)
+VALUES ('admin1', 'Admin1_123', 'ADMIN'),
+    ('user1', 'User1_123', 'USER'),
+    ('user2', 'User2_123', 'USER')
+;
+
+INSERT INTO post(id, title, photo_id, content, user_username)
 VALUES (1, 'Chorizo & mozzarella gnocchi bake',
-        'gnocchi-1d16725.png',
+        1,
         'STEP 1 <br/><br/>
         Heat the oil in a medium pan over a medium heat. Fry the onion and garlic for 8-10 mins until soft. Add the chorizo and fry for 5 mins more. Tip in the tomatoes and sugar, and season. Bring to a simmer, then add the gnocchi and cook for 8 mins, stirring often, until soft. Heat the grill to high.
         <br/><br/><br/>
@@ -14,7 +20,7 @@ VALUES (1, 'Chorizo & mozzarella gnocchi bake',
         Stir ¾ of the mozzarella and most of the basil through the gnocchi. Divide the mixture between six ovenproof ramekins, or put in one baking dish. Top with the remaining mozzarella, then grill for 3 mins, or until the cheese is melted and golden. Season, scatter over the remaining basil and serve with green salad.',
         'admin1'),
        (2, 'Easy classic lasagne',
-        'classic-lasange-4a66137.png',
+        2,
         'STEP 1 <br/><br/>
         Heat the oil in a large saucepan. Use kitchen scissors to snip the bacon into small pieces, or use a sharp knife to chop it on a chopping board. Add the bacon to the pan and cook for just a few mins until starting to turn golden. Add the onion, celery and carrot, and cook over a medium heat for 5 mins, stirring occasionally, until softened.
         <br/><br/><br/>
@@ -31,7 +37,7 @@ VALUES (1, 'Chorizo & mozzarella gnocchi bake',
         Put the crème fraîche in a bowl and mix with 2 tbsp water to loosen it and make a smooth pourable sauce. Pour this over the top of the pasta, then top with the mozzarella. Sprinkle Parmesan over the top and bake for 25–30 mins until golden and bubbling. Serve scattered with basil, if you like.',
         'user1'),
        (3, 'Easy carrot cake',
-        'carrot-cake-f1b3d0c.png',
+        3,
         'STEP 1 <br/><br/>
         Heat the oven to 180C/160C fan/gas 4. Oil and line the base and sides of two 20cm cake tins with baking parchment. Whisk the oil, yogurt, eggs, vanilla and zest in a jug. Mix the flour, sugar, cinnamon and nutmeg with a good pinch of salt in a bowl. Squeeze any lumps of sugar through your fingers, shaking the bowl a few times to bring the lumps to the surface.
         <br/><br/><br/>
